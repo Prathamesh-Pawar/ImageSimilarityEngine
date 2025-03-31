@@ -1,65 +1,63 @@
 # Image Similarity Engine
 
 ## Overview
-The Image Similarity Engine is a deep learning-based system that identifies similar images from a dataset given an input image. This project leverages Siamese Networks with Convolutional Neural Networks (CNNs) to compute image similarity.
+This project implements an Image Similarity Engine using deep learning models. It leverages both classification and triplet loss-based approaches to evaluate image similarity. The project is structured into different modules for training, evaluation, and utilities.
 
-## Features
-- Uses Siamese Networks to compare images
-- Supports feature extraction and similarity measurement
-- Provides an interface to input images and retrieve similar images from a dataset
-
-## Installation
-
-1. Clone the repository or download the project files.
-2. Install the required dependencies using:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-### 1. Prepare the Dataset
-Place images to be compared inside the `dataset/` directory.
-
-### 2. Train the Model
-Run the following command to train the Siamese Network on your dataset:
-   ```bash
-   python train.py
-   ```
-This will generate trained model weights stored in `models/`.
-
-### 3. Perform Image Similarity Search
-To find similar images for a given input image, run:
-   ```bash
-   python search.py --input path/to/input_image.jpg
-   ```
-This will return the most similar images from the dataset.
-
-## File Structure
+## Project Structure
 ```
 ImageSimilarityEngine/
-│── dataset/                # Folder containing dataset images
-│── models/                 # Saved model weights
-│── notebooks/              # Jupyter notebooks for experiments
-│── src/                    # Source code files
-│   │── siamese_model.py    # Model definition
-│   │── train.py            # Training script
-│   │── search.py           # Similarity search script
-│── requirements.txt        # Required dependencies
-│── README.md               # Project documentation
+│── EvaluationModel/
+│   │── best_model_classifier.pth        # Trained classifier model
+│   │── best_model_triplet.pth           # Trained triplet model
+│   │── evaluation_model.py              # Evaluation script
+│
+│── SimpleClassifier/
+│   │── cifar_classifier.py              # CIFAR classifier implementation
+│   │── cnn_network.py                   # CNN network for classification
+│
+│── Triplet/
+│   │── datasets_s.py                    # Dataset handling for triplet loss
+│   │── losses.py                         # Loss function implementations
+│   │── main.py                           # Main script for training/testing
+│   │── metrics.py                        # Metrics for evaluation
+│   │── networks.py                       # Network architectures
+│   │── tensorboard.ipynb                 # TensorBoard visualization
+│   │── train.py                          # Training script
+│   │── trainer.py                        # Model trainer logic
+│   │── Triplet.ipynb                     # Notebook for training/testing
+│   │── utils.py                          # Utility functions
 ```
 
-## Dependencies
-Ensure you have the following dependencies installed:
-- TensorFlow
-- Keras
-- OpenCV
-- NumPy
-- Matplotlib
+## Installation
+### Prerequisites
+Ensure you have Python 3.8+ installed along with the following dependencies:
+```bash
+pip install torch torchvision numpy matplotlib tensorboard
+```
 
-## Contributors
-- Prathamesh Pawar
+## Usage
+### Training
+To train the classifier model:
+```bash
+python SimpleClassifier/cifar_classifier.py
+```
 
-## License
-This project is licensed under the MIT License.
+To train the triplet model:
+```bash
+python Triplet/train.py
+```
+
+### Evaluation
+To evaluate an image using the trained models:
+```bash
+python EvaluationModel/evaluation_model.py --model best_model_triplet.pth --image <image_path>
+```
+
+## Acknowledgments
+This project uses PyTorch for deep learning and TensorBoard for visualization. The dataset used is assumed to be CIFAR or a similar dataset.
+
+## Future Work
+- Improve model performance with advanced architectures.
+- Implement a user-friendly API for image similarity search.
+- Explore additional datasets for better generalization.
 
