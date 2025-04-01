@@ -1,7 +1,7 @@
 # Image Similarity Engine
 
 ## Overview
-This project implements an Image Similarity Engine using deep learning models. It leverages both classification and triplet loss-based approaches to evaluate image similarity. The project is structured into different modules for training, evaluation, and utilities.
+This project we attempt implement an Image Similarity Engine triplet loss-based approaches to evaluate image similarity. This aims to find similar images to the anchor image from database.
 
 ## Project Structure
 ```
